@@ -1,0 +1,28 @@
+WanderLust DBMS Project Notes
+
+1. Database
+   - MySQL database name: wanderlust_db
+   - SQL setup file: database.sql
+   - Tables: hotels, rooms, customers, bookings
+   - Relationships:
+     - hotels.hotel_id -> rooms.hotel_id
+     - rooms.room_id -> bookings.room_id
+     - customers.customer_id -> bookings.customer_id
+
+2. Backend
+   - Node.js and Express.js
+   - MySQL connection through mysql2/promise
+   - Joi validation before insert/update
+   - method-override supports PUT and DELETE from EJS forms
+
+3. Frontend
+   - EJS templates
+   - Bootstrap styling
+   - CRUD pages for hotels/listings, rooms, customers, and bookings
+
+4. Validation Rules
+   - Required fields cannot be empty
+   - Room price must be positive
+   - Room capacity must be positive
+   - Check-out date must be later than check-in date
+   - Customer email and phone are validated when provided
