@@ -1,0 +1,70 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="detail-section">
+  <div class="management-header">
+    <div>
+      <h3 class="mb-1"><%= room.room_type %></h3>
+      <p class="text-muted mb-0"><%= room.hotel_name %> - <%= room.hotel_location %></p>
+    </div>
+    <div class="table-actions">
+      <a href="/rooms/<%= room.room_id %>/edit" class="btn btn-dark edit-btn">Edit</a>
+      <a href="/bookings/new?room_id=<%= room.room_id %>" class="btn btn-outline-success">Book</a>
+      <form action="/rooms/<%= room.room_id %>?_method=DELETE" method="post" onsubmit="return confirm('Delete this room and its related bookings?')">
+        <button class="btn btn-outline-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <p><b>Room ID:</b> <%= room.room_id %></p>
+      <p><b>Hotel:</b> <a href="/listings/<%= room.hotel_id %>" class="text-dark"><%= room.hotel_name %></a></p>
+      <p><b>Capacity:</b> <%= room.capacity %></p>
+      <p><b>Price:</b> ৳<%= Number(room.price).toLocaleString("en-BD") %>/night</p>
+      <p class="mb-0"><b>Availability:</b> <%= room.availability %></p>
+    </div>
+  </div>
+</div>
+
+<div class="detail-section">
+  <div class="management-header">
+    <h4 class="mb-0">Bookings For This Room</h4>
+    <a href="/bookings/new?room_id=<%= room.room_id %>" class="btn btn-dark add-btn">Add Booking</a>
+  </div>
+
+  <% if (bookings.length) { %>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let booking of bookings) { %>
+            <tr>
+              <td><%= booking.booking_id %></td>
+              <td><%= booking.customer_name %></td>
+              <td><%= booking.check_in_date %></td>
+              <td><%= booking.check_out_date %></td>
+              <td><span class="status-pill status-<%= booking.status %>"><%= booking.status %></span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="/bookings/<%= booking.booking_id %>" class="btn btn-sm btn-outline-dark">View</a>
+                  <a href="/bookings/<%= booking.booking_id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                </div>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div class="empty-state">No bookings found for this room.</div>
+  <% } %>
+</div>

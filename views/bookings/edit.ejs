@@ -1,0 +1,73 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="row form-shell">
+  <div class="col-8 offset-2">
+    <h3>Edit Booking</h3>
+    <form action="/bookings/<%= booking.booking_id %>?_method=PUT" method="post" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="room_id" class="form-label">Room</label>
+        <select id="room_id" name="booking[room_id]" class="form-select" required>
+          <% for (let room of rooms) { %>
+            <option value="<%= room.room_id %>" <%= booking.room_id === room.room_id ? "selected" : "" %>>
+              <%= room.hotel_name %> - <%= room.room_type %> (৳<%= Number(room.price).toLocaleString("en-BD") %>)
+            </option>
+          <% } %>
+        </select>
+        <div class="invalid-feedback">Please choose a room.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="customer_id" class="form-label">Customer</label>
+        <select id="customer_id" name="booking[customer_id]" class="form-select" required>
+          <% for (let customer of customers) { %>
+            <option value="<%= customer.customer_id %>" <%= booking.customer_id === customer.customer_id ? "selected" : "" %>>
+              <%= customer.name %><%= customer.email ? " - " + customer.email : "" %>
+            </option>
+          <% } %>
+        </select>
+        <div class="invalid-feedback">Please choose a customer.</div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="check_in_date" class="form-label">Check In</label>
+          <input
+            type="date"
+            id="check_in_date"
+            name="booking[check_in_date]"
+            value="<%= booking.check_in_date %>"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter a check-in date.</div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="check_out_date" class="form-label">Check Out</label>
+          <input
+            type="date"
+            id="check_out_date"
+            name="booking[check_out_date]"
+            value="<%= booking.check_out_date %>"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter a valid check-out date.</div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select id="status" name="booking[status]" class="form-select" required>
+            <option value="Pending" <%= booking.status === "Pending" ? "selected" : "" %>>Pending</option>
+            <option value="Confirmed" <%= booking.status === "Confirmed" ? "selected" : "" %>>Confirmed</option>
+            <option value="Cancelled" <%= booking.status === "Cancelled" ? "selected" : "" %>>Cancelled</option>
+            <option value="Completed" <%= booking.status === "Completed" ? "selected" : "" %>>Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-dark edit-btn">Update Booking</button>
+      <a href="/bookings/<%= booking.booking_id %>" class="btn btn-outline-secondary ms-2">Cancel</a>
+    </form>
+  </div>
+</div>

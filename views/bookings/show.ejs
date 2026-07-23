@@ -1,0 +1,41 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="detail-section">
+  <div class="management-header">
+    <div>
+      <h3 class="mb-1">Booking #<%= booking.booking_id %></h3>
+      <span class="status-pill status-<%= booking.status %>"><%= booking.status %></span>
+    </div>
+    <div class="table-actions">
+      <a href="/bookings/<%= booking.booking_id %>/edit" class="btn btn-dark edit-btn">Edit</a>
+      <% if (booking.status !== "Cancelled") { %>
+        <form action="/bookings/<%= booking.booking_id %>/cancel?_method=PUT" method="post">
+          <button class="btn btn-outline-warning">Cancel Booking</button>
+        </form>
+      <% } %>
+      <form action="/bookings/<%= booking.booking_id %>?_method=DELETE" method="post" onsubmit="return confirm('Delete this booking?')">
+        <button class="btn btn-outline-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><b>Customer:</b> <a href="/customers/<%= booking.customer_id %>" class="text-dark"><%= booking.customer_name %></a></p>
+          <p><b>Email:</b> <%= booking.email || "Not provided" %></p>
+          <p><b>Phone:</b> <%= booking.phone || "Not provided" %></p>
+        </div>
+        <div class="col-md-6">
+          <p><b>Hotel:</b> <a href="/listings/<%= booking.hotel_id %>" class="text-dark"><%= booking.hotel_name %></a></p>
+          <p><b>Room:</b> <a href="/rooms/<%= booking.room_id %>" class="text-dark"><%= booking.room_type %></a></p>
+          <p><b>Price:</b> &#2547;<%= Number(booking.price).toLocaleString("en-BD) %>/night</p>
+        </div>
+      </div>
+      <hr>
+      <p><b>Check In:</b> <%= booking.check_in_date %></p>
+      <p class="mb-0"><b>Check Out:</b> <%= booking.check_out_date %></p>
+    </div>
+  </div>
+</div>
