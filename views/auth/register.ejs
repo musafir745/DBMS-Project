@@ -1,0 +1,36 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="row form-shell">
+  <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+    <h3>Create Customer Account</h3>
+    <p class="text-muted">Register to manage your profile and hotel bookings.</p>
+    <form action="/auth/register" method="post" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" id="name" name="user[name]" class="form-control" required minlength="2" />
+        <div class="invalid-feedback">Please enter your name.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="user[email]" class="form-control" required />
+        <div class="invalid-feedback">Please enter a valid email.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="tel" id="phone" name="user[phone]" class="form-control" pattern="[0-9+\-\s()]{7,20}" />
+        <div class="invalid-feedback">Please enter a valid phone number.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="user[password]" class="form-control" required minlength="8" autocomplete="new-password" />
+        <div class="invalid-feedback">Password must contain at least 8 characters.</div>
+      </div>
+
+      <button class="btn btn-dark add-btn">Create Account</button>
+      <a href="/auth/login" class="btn btn-outline-secondary ms-2">Customer Login</a>
+    </form>
+  </div>
+</div>

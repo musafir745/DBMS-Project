@@ -1,0 +1,58 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="row form-shell">
+  <div class="col-8 offset-2">
+    <h3>Add Room</h3>
+    <form action="/rooms" method="post" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="hotel_id" class="form-label">Hotel / Listing</label>
+        <select id="hotel_id" name="room[hotel_id]" class="form-select" required>
+          <option value="">Choose hotel</option>
+          <% for (let hotel of hotels) { %>
+            <option value="<%= hotel.hotel_id %>" <%= selectedHotelId === hotel.hotel_id ? "selected" : "" %>>
+              <%= hotel.name %> - <%= hotel.location %>
+            </option>
+          <% } %>
+        </select>
+        <div class="invalid-feedback">Please choose a hotel/listing.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="room_type" class="form-label">Room Type</label>
+        <input
+          type="text"
+          id="room_type"
+          name="room[room_type]"
+          class="form-control"
+          placeholder="Deluxe, Suite, Single"
+          required
+        />
+        <div class="invalid-feedback">Please enter a room type.</div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="capacity" class="form-label">Capacity</label>
+          <input type="number" id="capacity" name="room[capacity]" min="1" class="form-control" required />
+          <div class="invalid-feedback">Please enter a positive capacity.</div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input type="number" id="price" name="room[price]" min="1" step="0.01" class="form-control" required />
+          <div class="invalid-feedback">Please enter a positive price.</div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="availability" class="form-label">Availability</label>
+          <select id="availability" name="room[availability]" class="form-select" required>
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-dark add-btn">Add Room</button>
+    </form>
+  </div>
+</div>

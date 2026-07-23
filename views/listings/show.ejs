@@ -1,0 +1,92 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="row detail-section">
+  <div class="col-8 offset-2">
+    <h3><%= listing.name %></h3>
+  </div>
+
+  <div class="card col-8 offset-2 show-card">
+    <img
+      src="<%= listing.image_url %>"
+      class="card-img-top show-img"
+      alt="<%= listing.name %>"
+    />
+    <div class="card-body p-3">
+      <p class="card-text"><b>Description:</b> <%= listing.description %></p>
+      <p class="card-text"><b>Location:</b> <%= listing.location %></p>
+      <p class="card-text"><b>Contact:</b> <%= listing.contact %></p>
+      <p class="card-text">
+        <b>Rooms:</b> <%= listing.room_count %>
+        <% if (listing.starting_price) { %>
+          | <b>Starting Price:</b> &#2547;<%= Number(listing.starting_price).toLocaleString("en-BD") %>/night
+        <% } %>
+      </p>
+    </div>
+  </div>
+
+  <% if (currUser && currUser.role === "admin") { %>
+    <div class="col-8 offset-2 mt-3 table-actions">
+      <a href="/listings/<%= listing.hotel_id %>/edit" class="btn btn-dark edit-btn">Edit</a>
+      <form action="/listings/<%= listing.hotel_id %>?_method=DELETE" method="post" onsubmit="return confirm('Delete this hotel/listing and its related rooms/bookings?')">
+        <button class="btn btn-outline-danger">Delete</button>
+      </form>
+      <a href="/rooms/new?hotel_id=<%= listing.hotel_id %>" class="btn btn-outline-dark">Add Room</a>
+    </div>
+  <% } %>
+</div>
+
+<div class="detail-section">
+  <div class="management-header">
+    <h4 class="mb-0">Rooms Under This Hotel</h4>
+    <% if (currUser && currUser.role === "admin") { %>
+      <a href="/rooms/new?hotel_id=<%= listing.hotel_id %>" class="btn btn-dark add-btn">Add Room</a>
+    <% } %>
+  </div>
+
+  <% if (rooms.length) { %>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let room of rooms) { %>
+            <tr>
+              <td><%= room.room_id %></td>
+              <td><%= room.room_type %></td>
+              <td><%= room.capacity %></td>
+              <td>৳<%= Number(room.price).toLocaleString("en-BD") %></td>
+              <td><%= room.availability %></td>
+              <td>
+                <div class="table-actions">
+                  <% if (currUser && currUser.role === "admin") { %>
+                    <a href="/rooms/<%= room.room_id %>" class="btn btn-sm btn-outline-dark">View</a>
+                    <a href="/rooms/<%= room.room_id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <% } else if (currUser && currUser.role === "customer") { %>
+                    <a href="/customer/bookings/new?room_id=<%= room.room_id %>" class="btn btn-sm btn-outline-success">Book</a>
+                  <% } else { %>
+                    <a href="/auth/login" class="btn btn-sm btn-outline-success">Login to Book</a>
+                  <% } %>
+                </div>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div class="empty-state">
+      <p class="mb-3">No rooms have been added for this hotel/listing.</p>
+      <% if (currUser && currUser.role === "admin") { %>
+        <a href="/rooms/new?hotel_id=<%= listing.hotel_id %>" class="btn btn-dark add-btn">Add Room</a>
+      <% } %>
+    </div>
+  <% } %>
+</div>
