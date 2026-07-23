@@ -77,7 +77,7 @@
             <b class="card-title"><%= Listing.name %></b>
             <p class="card-text mb-1"><%= Listing.location %></p>
             <p class="card-text">
-              <% if (Listing.starting_price) { %>
+              <% if (listing.starting_price) { %>
                &#2547;<%= Number(listing.starting_price).toLocaleString("en-BD") %>/night
               <% } else { %>
                 Add rooms to set pricing
