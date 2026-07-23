@@ -1,0 +1,224 @@
+body{
+    font-family: "Plus Jakarta Sans", serif !important;
+    font-optical-sizing: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+} 
+
+.container{
+    flex: 1;
+}
+
+ /* ===============navbar================ */
+.navbar{
+    height: 5rem;
+    background-color: #fff;
+}
+
+.fa-compass{
+    color: red;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: black !important;
+}
+
+    /* ===============footer================ */
+    .f-info-links a{
+        text-decoration: none;
+        color: #222222;
+    }
+    .f-info-links a:hover{
+        text-decoration: underline;
+    }
+
+    .f-info-links , .f-info-socials , .f-info-brand{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+   
+    
+    .f-info-socials i{
+        font-size: 1.2rem;
+        margin-right: 1rem;
+
+    }
+
+    .f-info{
+        height: 8rem;
+        background-color: #e3e3e3;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* ==========================================Cards=============================== */
+
+    /* .card{ */
+    .listing-card{
+        border: none !important;
+        margin-bottom: 2rem;
+    }
+
+    .card-img-top{
+        border-radius: 1rem !important;
+        width: 100%;
+        object-fit: cover !important;
+    }
+
+    .listing-card .card-body{
+        padding: 0 !important;
+    }
+
+    .card-text p{
+        font-weight: 400;
+    }
+
+    .listing-link{
+        text-decoration: none;
+    }
+
+    /* card hover styling by bootstrap class*/
+    .card-img-overlay{
+        opacity: 0;
+    }
+
+    .card-img-overlay:hover {
+        opacity: 0.2;
+        background-color: white;
+    }
+
+
+    /* =================new page=================== */
+
+    .add-btn{
+        background-color: #fe424d !important;
+        border: none !important;
+    }
+
+    /* ==============================edit page================== */
+
+    .edit-btn{
+        background-color: #fe424d !important;
+        border: none !important;
+    }
+
+    /* ==================show page======================= */
+
+    .show-img{
+        height: 30vh;
+    }
+
+    .btns{
+        display: flex;
+
+    }
+
+    .show-card{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* ====================map */
+    #map{
+        height: 400px;
+        width: 80vh;
+    }
+
+    .management-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 2rem 0 1rem;
+    }
+
+    .table-actions{
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .detail-section{
+        margin: 2rem 0;
+    }
+
+    .status-pill{
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.85rem;
+        background: #f1f3f5;
+    }
+
+    .status-Confirmed{
+        background: #d3f9d8;
+        color: #146c2e;
+    }
+
+    .status-Pending{
+        background: #fff3bf;
+        color: #8a5b00;
+    }
+
+    .status-Cancelled{
+        background: #ffe3e3;
+        color: #a61e4d;
+    }
+
+    .status-Completed{
+        background: #d0ebff;
+        color: #0b5c8e;
+    }
+
+    .form-shell{
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .empty-state{
+        border: 1px dashed #ced4da;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+        color: #6c757d;
+    }
+
+    .dashboard-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0 2rem;
+    }
+
+    .stat-card{
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        background: #fff;
+        padding: 1.15rem;
+        color: #343a40;
+        text-decoration: none;
+    }
+
+    .stat-card span{
+        display: block;
+        color: #6c757d;
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .stat-card strong{
+        font-size: 1.8rem;
+        color: #fe424d;
+    }
+
+    .stat-link:hover{
+        border-color: #fe424d;
+        color: #343a40;
+    }

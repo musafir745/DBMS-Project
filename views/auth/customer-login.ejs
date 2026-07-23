@@ -1,0 +1,24 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="row form-shell">
+  <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+    <h3>Customer Login</h3>
+    <p class="text-muted">Access your profile and your own booking records.</p>
+    <form action="/auth/login" method="post" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="credentials[email]" class="form-control" required autocomplete="email" />
+        <div class="invalid-feedback">Please enter a valid email.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="credentials[password]" class="form-control" required autocomplete="current-password" />
+        <div class="invalid-feedback">Please enter your password.</div>
+      </div>
+
+      <button class="btn btn-dark add-btn">Login</button>
+      <a href="/auth/register" class="btn btn-outline-secondary ms-2">Register</a>
+    </form>
+  </div>
+</div>
