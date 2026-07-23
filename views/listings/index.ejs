@@ -1,0 +1,100 @@
+<% layout('./layouts/boilerplate') -%>
+
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter {
+    text-align: center;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    opacity: 0.7;
+  }
+
+  .filter:hover {
+    opacity: 1;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+  }
+</style>
+
+<div id="filters">
+  <div class="filter">
+    <div><i class="fa-solid fa-hotel"></i></div>
+    <p>Hotels</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-tree-city"></i></div>
+    <p>Cities</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-mountain-sun"></i></div>
+    <p>Mountains</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-water-ladder"></i></div>
+    <p>Pools</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-calendar-check"></i></div>
+    <p>Bookings</p>
+  </div>
+</div>
+
+<div class="management-header">
+  <div>
+    <h3 class="mb-1"><%= currUser && currUser.role === "admin" ? "Manage Listings" : "Hotels / Listings" %></h3>
+    <% if (search) { %>
+      <p class="text-muted mb-0">Search results for "<%= search %>"</p>
+    <% } %>
+  </div>
+  <% if (currUser && currUser.role === "admin") { %>
+    <a href="/listings/new" class="btn btn-dark add-btn">Add Hotel</a>
+  <% } %>
+</div>
+
+<% if (allListings.length) { %>
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <% for (let Listing of allListings) { %>
+      <a href="/listings/<%= Listing.hotel_id %>" class="listing-link text-dark">
+        <div class="card col listing-card">
+          <img
+            src="<%= Listing.image_url %>"
+            class="card-img-top"
+            alt="<%= Listing.name %>"
+            style="height: 20rem"
+          />
+
+          <div class="card-body">
+            <div class="card-img-overlay"></div>
+            <b class="card-title"><%= Listing.name %></b>
+            <p class="card-text mb-1"><%= Listing.location %></p>
+            <p class="card-text">
+              <% if (Listing.starting_price) { %>
+                &#8377; <%= Number(Listing.starting_price).toLocaleString("en-IN") %>/night
+              <% } else { %>
+                Add rooms to set pricing
+              <% } %>
+            </p>
+          </div>
+        </div>
+      </a>
+    <% } %>
+  </div>
+<% } else { %>
+  <div class="empty-state">
+    <p class="mb-3">No hotels/listings found.</p>
+    <% if (currUser && currUser.role === "admin") { %>
+      <a href="/listings/new" class="btn btn-dark add-btn">Add Hotel</a>
+    <% } %>
+  </div>
+<% } %>
