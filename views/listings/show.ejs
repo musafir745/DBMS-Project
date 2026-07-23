@@ -18,7 +18,7 @@
       <p class="card-text">
         <b>Rooms:</b> <%= listing.room_count %>
         <% if (listing.starting_price) { %>
-          | <b>Starting Price:</b> &#2547;<%= Number(listing.starting_price).toLocaleString("en-BD") %>/night
+         | <b>Starting Price:</b> &#2547;<%= Number(Listing.starting_price).toLocaleString("en-BD") %>/night
         <% } %>
       </p>
     </div>
